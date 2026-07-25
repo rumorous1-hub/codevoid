@@ -34,6 +34,7 @@ function CodeCard() {
 
 export default function Hero() {
   const [typed, setTyped] = useState("");
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     let i = 0;
@@ -47,6 +48,12 @@ export default function Hero() {
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText("tenshikodo");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -75,23 +82,21 @@ export default function Hero() {
             I build systems that <br/> <span className="text-primary text-glow-cyan">Feel alive.</span>
           </h1>
           <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-md">
-            I'm <strong>tenshi</strong>, a programmer with over 4 years in building performance-friendly modular systems and experiences.
+            I'm <strong>tenshi</strong>, a programmer with over 5 years in building performance-friendly modular systems and experiences.
           </p>
           
-          {/* Changed <a> tags to <button> tags with onClick */}
           <div className="flex flex-wrap gap-4 pt-4">
             <button onClick={() => scrollTo('work')} className="px-6 py-3 bg-primary text-primary-foreground font-mono font-bold text-sm hover:opacity-90 box-glow-cyan transition-all">
               VIEW MY WORK
             </button>
-            <button onClick={() => scrollTo('contact')} className="px-6 py-3 border border-border bg-card font-mono font-bold text-sm hover:border-primary transition-all">
-              GET IN TOUCH
+            <button onClick={handleCopy} className="px-6 py-3 border border-border bg-card font-mono font-bold text-sm hover:border-primary transition-all w-[140px] flex justify-center">
+              {copied ? "COPIED!" : "GET IN TOUCH"}
             </button>
           </div>
         </div>
         <CodeCard />
       </div>
 
-      {/* Changed Scroll Indicator <a> to <button> */}
       <button onClick={() => scrollTo('work')} className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity">
         <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground">SCROLL</span>
         <ChevronDown className="w-4 h-4 text-muted-foreground animate-bounce" />

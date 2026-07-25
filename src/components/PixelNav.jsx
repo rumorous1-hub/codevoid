@@ -9,6 +9,7 @@ const LINKS = [
 
 export default function PixelNav() {
   const [active, setActive] = useState("home");
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -20,8 +21,7 @@ export default function PixelNav() {
       { rootMargin: "-40% 0px -55% 0px" }
     );
 
-    // Removed the phantom "event" id that wasn't being used
-    ["home", "work", "about", "contact"].forEach((id) => {
+    ["home", "work", "about"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) obs.observe(el);
     });
@@ -29,9 +29,14 @@ export default function PixelNav() {
     return () => obs.disconnect();
   }, []);
 
-  // Helper function to handle the smooth scroll
-  const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (id) => {
+    if (id === "contact") {
+      navigator.clipboard.writeText("tenshikodo");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -42,7 +47,7 @@ export default function PixelNav() {
           return (
             <button
               key={l.id}
-              onClick={() => scrollTo(l.id)}
+              onClick={() => handleNavClick(l.id)}
               className={`px-2 sm:px-3 py-1.5 font-mono text-[11px] sm:text-xs tracking-wider transition-colors ${
                 l.brand
                   ? "text-primary text-glow-cyan font-bold"
@@ -51,7 +56,7 @@ export default function PixelNav() {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {l.label}
+              {l.id === "contact" && copied ? "copied!" : l.label}
             </button>
           );
         })}
