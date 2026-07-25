@@ -89,8 +89,8 @@ export default function Hero() {
             <button onClick={() => scrollTo('work')} className="px-6 py-3 bg-primary text-primary-foreground font-mono font-bold text-sm hover:opacity-90 box-glow-cyan transition-all">
               VIEW MY WORK
             </button>
-            <button onClick={handleCopy} className="px-6 py-3 border border-border bg-card font-mono font-bold text-sm hover:border-primary transition-all w-[140px] flex justify-center">
-              {copied ? "COPIED!" : "GET IN TOUCH"}
+            <button onClick={() => scrollTo('contact')} className="px-6 py-3 border border-border bg-card font-mono font-bold text-sm hover:border-primary transition-all">
+              GET IN TOUCH
             </button>
           </div>
         </div>

@@ -9,7 +9,6 @@ const LINKS = [
 
 export default function PixelNav() {
   const [active, setActive] = useState("home");
-  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -21,7 +20,7 @@ export default function PixelNav() {
       { rootMargin: "-40% 0px -55% 0px" }
     );
 
-    ["home", "work", "about"].forEach((id) => {
+    ["home", "work", "about", "contact"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) obs.observe(el);
     });
@@ -30,13 +29,7 @@ export default function PixelNav() {
   }, []);
 
   const handleNavClick = (id) => {
-    if (id === "contact") {
-      navigator.clipboard.writeText("tenshikodo");
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -56,7 +49,7 @@ export default function PixelNav() {
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {l.id === "contact" && copied ? "copied!" : l.label}
+              {l.label}
             </button>
           );
         })}
