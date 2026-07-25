@@ -1,7 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
   :root {
     --background: 240 30% 4%;
     --foreground: 240 20% 96%;
@@ -22,21 +27,45 @@
     --border: 240 8% 19%;
     --input: 240 8% 19%;
     --ring: 186 100% 50%;
-    --chart-1: 186 100% 50%;
-    --chart-2: 330 100% 55%;
-    --chart-3: 43 90% 60%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 197 37% 50%;
-    --radius: 2px;
-    --font-heading: "Pixelify Sans", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "JetBrains Mono", ui-monospace, monospace;
-    --font-display: "Pixelify Sans", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, monospace;
-    --sidebar-background: 240 24% 7%;
-    --sidebar-foreground: 240 20% 96%;
-    --sidebar-primary: 186 100% 50%;
-    --sidebar-primary-foreground: 240 30% 4%;
-    --sidebar-accent: 240 8% 12%;
-    --sidebar-accent-foreground: 240 20% 96%;
-    --sidebar-border: 240 8% 19%;
-    --sidebar-ring: 186 100% 50%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+@layer utilities {
+  .text-glow-cyan { text-shadow: 0 0 10px theme('colors.primary.DEFAULT'); }
+  .text-glow-pink { text-shadow: 0 0 10px theme('colors.accent.DEFAULT'); }
+  .text-glow-soft { text-shadow: 0 0 20px rgba(255,255,255,0.1); }
+  .box-glow-cyan { box-shadow: 0 0 15px rgba(0, 255, 255, 0.15), inset 0 0 10px rgba(0, 255, 255, 0.05); }
+  .box-edge { box-shadow: inset 0 0 0 1px theme('colors.border'); }
+  
+  .animate-drift { animation: drift 60s linear infinite; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  
+  .crt-scanlines {
+     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+     background-size: 100% 2px, 3px 100%;
+  }
+  .crt-vignette {
+     background: radial-gradient(circle, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+  }
+  
+  @keyframes drift {
+    from { background-position: 0 0; }
+    to { background-position: -1000px 500px; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  .font-pixel, .font-display { font-family: 'Pixelify Sans', sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+}

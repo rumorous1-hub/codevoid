@@ -1,3 +1,5 @@
+import React from "react";
+
 function DiscordIcon({ className }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -5,6 +7,7 @@ function DiscordIcon({ className }) {
     </svg>
   );
 }
+
 export default function Contact() {
   return (
     <section id="contact" className="relative py-24 sm:py-32 border-t border-border">
@@ -35,7 +38,9 @@ export default function Contact() {
       </div>
       <footer className="mt-20 pt-8 border-t border-border">
         <div className="text-center font-mono text-xs text-muted-foreground">
-          © 2026 Tenshikodo. All rights reserved.
+            2026 Tenshikodo. All rights reserved.
         </div>
       </footer>
     </section>
+  );
+}

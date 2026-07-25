@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
 const LINKS = [
   { id: "home", label: "tenshikodo", brand: true },
   { id: "work", label: "work" },
   { id: "about", label: "about" },
-  { id: "contact", label: "contact" },
+  { id: "contact", label: "contact" }
 ];
+
 export default function PixelNav() {
   const [active, setActive] = useState("home");
+
   useEffect(() => {
     const obs = new IntersectionObserver(
       (entries) => {
@@ -16,12 +19,15 @@ export default function PixelNav() {
       },
       { rootMargin: "-40% 0px -55% 0px" }
     );
+
     ["home", "work", "about", "event", "contact"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) obs.observe(el);
     });
+
     return () => obs.disconnect();
   }, []);
+
   return (
     <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4">
       <nav className="flex items-center gap-1 sm:gap-2 bg-card/80 backdrop-blur border border-border box-edge px-2 sm:px-3 py-2">
@@ -37,3 +43,13 @@ export default function PixelNav() {
                   : isActive
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {l.label}
+            </a>
+          );
+        })}
+      </nav>
+    </header>
+  );
+}
