@@ -45,9 +45,12 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 pb-24 sm:py-32 overflow-hidden">
-      {/* Background image NOW STATIC (removed animate-drift) */}
       <div className="absolute inset-0 -z-10">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-30" 
@@ -63,7 +66,6 @@ export default function Hero() {
             AVAILABLE FOR WORK
           </div>
           
-          {/* Restored solid blue rectangular cursor */}
           <div className="font-mono text-sm text-muted-foreground h-6 flex items-center">
             {typed}
             <span className="inline-block w-2.5 h-[1.1em] bg-primary animate-pulse ml-1" />
@@ -75,22 +77,25 @@ export default function Hero() {
           <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-md">
             I'm <strong>tenshi</strong>, a programmer with over 5 years in building performance-friendly modular systems and experiences.
           </p>
+          
+          {/* Changed <a> tags to <button> tags with onClick */}
           <div className="flex flex-wrap gap-4 pt-4">
-            <a href="#work" className="px-6 py-3 bg-primary text-primary-foreground font-mono font-bold text-sm hover:opacity-90 box-glow-cyan transition-all">
+            <button onClick={() => scrollTo('work')} className="px-6 py-3 bg-primary text-primary-foreground font-mono font-bold text-sm hover:opacity-90 box-glow-cyan transition-all">
               VIEW MY WORK
-            </a>
-            <a href="#contact" className="px-6 py-3 border border-border bg-card font-mono font-bold text-sm hover:border-primary transition-all">
+            </button>
+            <button onClick={() => scrollTo('contact')} className="px-6 py-3 border border-border bg-card font-mono font-bold text-sm hover:border-primary transition-all">
               GET IN TOUCH
-            </a>
+            </button>
           </div>
         </div>
         <CodeCard />
       </div>
 
-      <a href="#work" className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity">
+      {/* Changed Scroll Indicator <a> to <button> */}
+      <button onClick={() => scrollTo('work')} className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity">
         <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground">SCROLL</span>
         <ChevronDown className="w-4 h-4 text-muted-foreground animate-bounce" />
-      </a>
+      </button>
     </section>
   );
 }

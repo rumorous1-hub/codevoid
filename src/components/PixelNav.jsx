@@ -20,7 +20,8 @@ export default function PixelNav() {
       { rootMargin: "-40% 0px -55% 0px" }
     );
 
-    ["home", "work", "about", "event", "contact"].forEach((id) => {
+    // Removed the phantom "event" id that wasn't being used
+    ["home", "work", "about", "contact"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) obs.observe(el);
     });
@@ -28,15 +29,20 @@ export default function PixelNav() {
     return () => obs.disconnect();
   }, []);
 
+  // Helper function to handle the smooth scroll
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4">
       <nav className="flex items-center gap-1 sm:gap-2 bg-card/80 backdrop-blur border border-border box-edge px-2 sm:px-3 py-2">
         {LINKS.map((l) => {
           const isActive = active === l.id;
           return (
-            <a
+            <button
               key={l.id}
-              href={`#${l.id}`}
+              onClick={() => scrollTo(l.id)}
               className={`px-2 sm:px-3 py-1.5 font-mono text-[11px] sm:text-xs tracking-wider transition-colors ${
                 l.brand
                   ? "text-primary text-glow-cyan font-bold"
@@ -46,7 +52,7 @@ export default function PixelNav() {
               }`}
             >
               {l.label}
-            </a>
+            </button>
           );
         })}
       </nav>
