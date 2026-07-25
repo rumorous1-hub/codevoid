@@ -7,7 +7,8 @@ import PageNotFound from './lib/PageNotFound';
 export default function App() {
   return (
     <AuthProvider>
-      <Router>
+      {/* Add the basename right here so the router knows where it lives */}
+      <Router basename="/codevoid">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<PageNotFound />} />
