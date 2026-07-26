@@ -82,7 +82,7 @@ export default function Hero() {
             I build systems that <br/> <span className="text-primary text-glow-cyan">Feel alive.</span>
           </h1>
           <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-md">
-            I'm <strong>tenshi</strong>, a programmer with over 5 years in building performance-friendly modular systems and experiences.
+            I'm <strong>tenshi</strong>, a programmer with over 4 years in building performance-friendly modular systems and experiences.
           </p>
           
           <div className="flex flex-wrap gap-4 pt-4">
